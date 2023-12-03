@@ -6,7 +6,8 @@ import (
 )
 
 func handlerFunc(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "<h1>Welcome to my awesome site!</h1>")
+	w.Header().Set("Content-type", "text/html; charset=utf-8")
+	fmt.Fprint(w, "<h1>Welcome to my awesome site that now refreshes dynamically!</h1>")
 }
 
 func main() {
