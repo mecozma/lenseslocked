@@ -8,12 +8,7 @@ import (
 // Alternatively a named struct could be used.
 type User struct {
 	Name string
-	Age  int
-	Meta UserMeta
-}
-
-type UserMeta struct {
-	Visits int
+	Bio  string
 }
 
 func main() {
@@ -22,19 +17,9 @@ func main() {
 		panic(err)
 	}
 
-	// anonymous struct.
-	// user := struct {
-	// 	Name string
-	// }{
-	// 	Name: "Hank Hill",
-	// }
-
 	user := User{
 		Name: "Hank Hill",
-		Age:  112,
-		Meta: UserMeta{
-			Visits: 4,
-		},
+		Bio:  `<script>alert("HAHA, careful there!");</script>`,
 	}
 
 	err = t.Execute(os.Stdout, user)

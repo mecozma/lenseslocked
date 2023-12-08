@@ -9,8 +9,9 @@ import (
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
+	bio := `<script>alert("HAHA, careful there!");</script>)`
 	w.Header().Set("Content-type", "text/html; charset=utf-8")
-	fmt.Fprint(w, "<h1>Welcome to my awesome site that now refreshes dynamically!</h1>")
+	fmt.Fprint(w, "<h1>Welcome to my awesome site that now refreshes dynamically!</h1><p>Bio: "+bio+"</p>")
 }
 
 func contactHandler(w http.ResponseWriter, r *http.Request) {
