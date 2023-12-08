@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
@@ -24,11 +25,18 @@ func faqHandler(w http.ResponseWriter, r *http.Request) {
 	support?</h2><p>Email us - <a href="support@lenslocked.com">support@lenslockes.com</a></p>`)
 }
 
+func galleryHandler(w http.ResponseWriter, r *http.Request) {
+	userName := chi.URLParam(r, "userName")
+	w.Write([]byte(fmt.Sprintf("Hello %s!", userName)))
+}
+
 func main() {
 	r := chi.NewRouter()
+	r.Use(middleware.Logger)
 	r.Get("/", homeHandler)
 	r.Get("/contact", contactHandler)
 	r.Get("/faq", faqHandler)
+	r.Get("/gallery/{userName}", galleryHandler)
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Our server is a bit shy now, please try again :)", http.StatusNotFound)
 	})
