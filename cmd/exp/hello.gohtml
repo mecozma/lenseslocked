@@ -1,11 +1,30 @@
-<h1>Hello, {{.Name}}!</h1>
-<p>Bio: {{.Bio}}</p>
-
-<script>
-    const user = {
-        "name": {{.Name}},
-        "bio": {{.Bio}},
-        "age": {{.Age}}
-    };
-    console.log(user);
-</script>
+<h1>
+    Hello,
+     {{if .Name}}
+        {{.Name}}
+    {{- else}}
+        stranger
+     {{- end}}
+    !
+</h1>
+<p>Bio: {{.Bio.Description}}</p>
+<p>
+    Age:
+    {{if .Age}}
+        {{.Age}}
+    {{- else}}
+        immortal
+    {{- end}}
+    !
+</p>
+<p>
+   {{if .Interests}}
+        <ul>
+            {{range .Interests.Hobby}}
+                <li>{{.}}</li>
+            {{- end}}
+        </ul>
+    {{- else}}
+        This is a boring person!
+   {{- end}}
+</p>

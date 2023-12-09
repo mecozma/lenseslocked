@@ -19,4 +19,15 @@ Chi provides quite a few builtin middleware. One is the Logger middleware,
 which eill track how long each request is taking.
 Try to add it to your application, then only a single route.
 
+## Section 4
+
+### Exercise 1 - Add new fields, and then show in the html template.
+
+### Exercise 2 - experiment with different data types
+integers
+floats
+maps
+slices
+
+### Exercise 4 - Add an if/else statement inside your template
 
