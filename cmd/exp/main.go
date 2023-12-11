@@ -1,31 +1,33 @@
 package main
 
 import (
-	"html/template"
-	"os"
+	"errors"
+	"fmt"
 )
 
-// Alternatively a named struct could be used.
-type User struct {
-	Name string
-	Bio  string
-	Age  int
+func main() {
+	err := CreateOrg()
+	fmt.Println(err)
 }
 
-func main() {
-	t, err := template.ParseFiles("hello.gohtml")
-	if err != nil {
-		panic(err)
-	}
+func Connect() error {
+	return errors.New("connection failed")
+}
 
-	user := User{
-		Name: "Hank Hill",
-		Bio:  `<script>alert("HAHA, careful there!");</script>`,
-		Age:  112,
-	}
+func CreateUser() error {
+	err := Connect()
 
-	err = t.Execute(os.Stdout, user)
 	if err != nil {
-		panic(err)
+		return fmt.Errorf("create user: %w", err)
 	}
+	// ... continue on
+	return nil
+}
+
+func CreateOrg() error {
+	err := CreateUser()
+	if err != nil {
+		return fmt.Errorf("create org: %w", err)
+	}
+	return nil
 }
