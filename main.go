@@ -2,31 +2,24 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"log"
 	"net/http"
 	"path/filepath"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	"github.com/mecozma/lenslocked/views"
 )
 
 // executeTemplate function renders the html templates.
 func executeTemplate(w http.ResponseWriter, filepath string) {
-	w.Header().Set("Content-type", "text/html; charset=utf-8")
-	// tplPath joines the path before passing it to Parsefiles method to ensure it is working on any OS.
-	tpl, err := template.ParseFiles(filepath)
+	t, err := views.Parse(filepath)
 	if err != nil {
 		log.Printf("Parsing template: %v", err)
 		http.Error(w, "There was an error parsing the template.", http.StatusInternalServerError)
 		return
 	}
-	err = tpl.Execute(w, nil)
-	if err != nil {
-		log.Printf("Executing template: %v", err)
-		http.Error(w, "There was an error executing the template.", http.StatusInternalServerError)
-		return
-	}
+	t.Execute(w, nil)
 }
 
 // homeHandler function handles the home page.
