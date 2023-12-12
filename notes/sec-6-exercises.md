@@ -26,7 +26,7 @@ func A() error {
 	return ErrNotFound
 }
 
-func B() error {
+func B() error { 
 	err := A()
   if err != nil {
   	return fmt.Errorf("b: %w", err)
