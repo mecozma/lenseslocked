@@ -22,6 +22,9 @@ func main() {
 	tpl = views.Must(views.Parse(filepath.Join("templates", "faq.gohtml")))
 	r.Get("/faq", controllers.StaticHandler(tpl))
 
+	tpl = views.Must(views.Parse((filepath.Join("templates", "gallery.gohtml"))))
+	r.Get("/gallery", controllers.StaticHandler(tpl))
+
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Our server is a bit shy now, please try again :)", http.StatusNotFound)
 	})
