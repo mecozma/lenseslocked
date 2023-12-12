@@ -7,6 +7,7 @@ import (
 	"net/http"
 )
 
+// Parse function parses the html templates.
 func Parse(filepath string) (Template, error) {
 	// tplPath joines the path before passing it to Parsefiles method to ensure it is working on any OS.
 	tpl, err := template.ParseFiles(filepath)
@@ -23,7 +24,7 @@ type Template struct {
 	htmlTpl *template.Template
 }
 
-// executeTemplate function renders the html templates.
+// Execute function renders the html templates.
 func (t Template) Execute(w http.ResponseWriter, data interface{}) {
 	w.Header().Set("Content-type", "text/html; charset=utf-8")
 	err := t.htmlTpl.Execute(w, nil) //TODO pass `data` to Execute()
