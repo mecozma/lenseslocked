@@ -7,6 +7,13 @@ import (
 	"net/http"
 )
 
+func Must(t Template, err error) Template {
+	if err != nil {
+		panic(err)
+	}
+	return t
+}
+
 // Parse function parses the html templates.
 func Parse(filepath string) (Template, error) {
 	// tplPath joines the path before passing it to Parsefiles method to ensure it is working on any OS.
