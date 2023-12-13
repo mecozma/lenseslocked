@@ -34,7 +34,7 @@ type Template struct {
 // Execute function renders the html templates.
 func (t Template) Execute(w http.ResponseWriter, data interface{}) {
 	w.Header().Set("Content-type", "text/html; charset=utf-8")
-	err := t.htmlTpl.Execute(w, nil) //TODO pass `data` to Execute()
+	err := t.htmlTpl.Execute(w, data) //TODO pass `data` to Execute()
 	if err != nil {
 		log.Printf("Executing template: %v", err)
 		http.Error(w, "There was an error executing the template.", http.StatusInternalServerError)
