@@ -3,6 +3,7 @@ package views
 import (
 	"fmt"
 	"html/template"
+	"io/fs"
 	"log"
 	"net/http"
 )
@@ -14,12 +15,11 @@ func Must(t Template, err error) Template {
 	return t
 }
 
-// Parse function parses the html templates.
-func Parse(filepath string) (Template, error) {
-	// tplPath joines the path before passing it to Parsefiles method to ensure it is working on any OS.
-	tpl, err := template.ParseFiles(filepath)
+// ParseFS function parses the html templates.
+func ParseFS(fs fs.FS, pattern string) (Template, error) {
+	tpl, err := template.ParseFS(fs, pattern)
 	if err != nil {
-		return Template{}, fmt.Errorf("parsing template: %w", err)
+		return Template{}, fmt.Errorf("parseFS template: %w", err)
 	}
 	t := Template{
 		htmlTpl: tpl,
