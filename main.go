@@ -37,6 +37,12 @@ func main() {
 		"tailwind.gohtml"))
 	r.Get("/gallery", controllers.StaticHandler(tpl))
 
+	tpl = views.Must(views.ParseFS(
+		templates.FS,
+		"signup.gohtml",
+		"tailwind.gohtml"))
+	r.Get("/signup", controllers.StaticHandler(tpl))
+
 	r.NotFound(func(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Our server is a bit shy now, please try again :)",
 			http.StatusNotFound)
